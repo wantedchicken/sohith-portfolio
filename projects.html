@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects | Sohith Sai Malyala</title>
+  <meta name="description" content="Projects by Sohith Sai Malyala — Data Engineering and Analytics." />
+
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script defer src="assets/script.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Sohith<span>.</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" data-nav-toggle>☰</button>
+      <nav class="nav" data-nav>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="index.html#contact" class="btn btn-sm">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="page-head">
+          <h1>Projects</h1>
+          <p class="muted">Selected work across data engineering, analytics, and dashboarding.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card project">
+            <h3>NYC Taxi Data Analysis & Dashboard</h3>
+            <p class="muted">Python • ETL • Analytics • Geospatial Dashboards</p>
+            <ul class="bullets">
+              <li>Built an ingestion and processing pipeline handling <strong>50+ GB</strong> of raw trip data; cut preprocessing time by <strong>40%</strong> via optimized I/O and vectorized Python transformations.</li>
+              <li>Developed production-grade ETL workflows to clean, transform, and aggregate multi-million-row datasets, enabling low-latency analytics for reporting and modeling.</li>
+              <li>Built interactive dashboards with dynamic filtering and geospatial visualization; consistently achieved <strong>sub-300ms</strong> query latency for end users.</li>
+            </ul>
+            <div class="tags">
+              <span>Python</span><span>ETL</span><span>Dashboards</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-sm" href="#" target="_blank" rel="noopener">GitHub</a>
+              <a class="btn btn-sm btn-ghost" href="#" target="_blank" rel="noopener">Demo</a>
+            </div>
+          </article>
+
+          <article class="card project">
+            <h3>Amazon USA Sales Database & Analytics</h3>
+            <p class="muted">PostgreSQL • SQL Optimization • Streamlit</p>
+            <ul class="bullets">
+              <li>Designed a normalized PostgreSQL schema supporting millions of records, enforcing referential integrity and efficient analytical querying.</li>
+              <li>Implemented batch ingestion and optimized SQL queries (joins, aggregations, indexing), reducing execution time by <strong>50–60%</strong>.</li>
+              <li>Built a Streamlit analytics application for self-service reporting, improving business user access to insights by <strong>20%</strong>.</li>
+            </ul>
+            <div class="tags">
+              <span>PostgreSQL</span><span>SQL</span><span>Streamlit</span>
+            </div>
+            <div class="actions">
+              <a class="btn btn-sm" href="#" target="_blank" rel="noopener">GitHub</a>
+              <a class="btn btn-sm btn-ghost" href="#" target="_blank" rel="noopener">Demo</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="card note">
+          <p class="muted">
+            Replace the GitHub/Demo links with your actual URLs. If you share your repo links, I’ll plug them in and
+            add thumbnails for a more “premium” look.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> Sohith Sai Malyala</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
