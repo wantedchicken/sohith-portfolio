@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sohith Sai M — Data Engineer & Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── THEME TOKENS ── */
+    :root {
+      --accent:       #106EBE;
+      --accent-light: #1a87e0;
+      --accent-dim:   #0d5a9a;
+      --max:          880px;
+      --radius:       4px;
+      --transition:   .25s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg:         #2E2E2E;
+      --bg2:        #383838;
+      --bg3:        #424242;
+      --border:     #4a4a4a;
+      --ink:        #f0f0f0;
+      --ink2:       #b0b0b0;
+      --ink3:       #707070;
+      --shadow:     0 4px 24px rgba(0,0,0,.4);
+      --tag-bg:     #333333;
+      --tag-color:  #909090;
+      --nav-bg:     rgba(46,46,46,0.9);
+    }
+
+    [data-theme="light"] {
+      --bg:         #FFFDF2;
+      --bg2:        #ffffff;
+      --bg3:        #f5f2e4;
+      --border:     #e2dfc8;
+      --ink:        #1c1a10;
+      --ink2:       #4a4630;
+      --ink3:       #9a9478;
+      --shadow:     0 4px 24px rgba(16,110,190,.07);
+      --tag-bg:     #f0eedd;
+      --tag-color:  #5a5440;
+      --nav-bg:     rgba(255,253,242,0.92);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      opacity: 0; animation: fadeDown .5s .1s ease forwards;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: .85rem; color: #fff; text-decoration: none;
+      font-weight: 700; letter-spacing: .1em;
+      background: var(--accent);
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-logo:hover { background: var(--accent-light); transform: scale(1.08); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--ink3); font-size: .82rem;
+      letter-spacing: .08em; text-transform: uppercase; font-weight: 500;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: all var(--transition);
+      color: var(--ink2);
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
+
+    /* ── SECTIONS ── */
+    section { max-width: var(--max); margin: 0 auto; padding: 6rem 2rem; }
+    section + section { border-top: 1px solid var(--border); }
+    .section-label {
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 2.5rem; font-weight: 500;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--accent); opacity: .4; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding-top: 9rem; padding-bottom: 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-accent {
+      position: absolute; top: -120px; right: -180px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(16,110,190,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.2rem; font-weight: 500;
+      opacity: 0; animation: fadeUp .5s .3s ease forwards;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      line-height: 1.08; font-weight: 400; color: var(--ink);
+      opacity: 0; animation: fadeUp .6s .42s ease forwards;
+      transition: color var(--transition);
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 2.8rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .5s .54s ease forwards;
+    }
+    .hero-stat { position: relative; padding-left: 1rem; }
+    .hero-stat::before {
+      content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+      width: 2px; background: var(--accent); border-radius: 2px;
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; line-height: 1; color: var(--ink); font-weight: 600;
+      transition: color var(--transition);
+    }
+    .hero-stat-num sup { font-size: 1rem; color: var(--accent); vertical-align: super; }
+    .hero-stat-label { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink3); margin-top: .2rem; }
+
+    .hero-sub {
+      margin-top: 2rem; max-width: 500px; color: var(--ink2); font-size: .98rem;
+      opacity: 0; animation: fadeUp .5s .66s ease forwards;
+      transition: color var(--transition);
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .5s .78s ease forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .72rem 1.6rem; border-radius: var(--radius);
+      font-size: .88rem; font-weight: 500; letter-spacing: .04em;
+      text-decoration: none; font-family: 'Outfit', sans-serif;
+      transition: all var(--transition); cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(16,110,190,.35); }
+    .btn-primary:hover { background: var(--accent-light); box-shadow: 0 6px 22px rgba(16,110,190,.5); transform: translateY(-1px); }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--ink); background: transparent; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(16,110,190,.06); }
+    .hero-scroll {
+      margin-top: 4rem; display: flex; align-items: center; gap: .75rem;
+      color: var(--ink3); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase;
+      opacity: 0; animation: fadeUp .5s .9s ease forwards;
+    }
+    .hero-scroll::before { content: ''; display: block; width: 36px; height: 1px; background: var(--border); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--ink2); margin-bottom: 1rem; font-size: .96rem; transition: color var(--transition); }
+    .about-facts { display: flex; flex-direction: column; gap: 1.4rem; }
+    .fact {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.25rem;
+      border-left: 3px solid var(--accent);
+      transition: background var(--transition), border-color var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .fact-label { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: .25rem; font-weight: 500; }
+    .fact-value { font-weight: 500; color: var(--ink); font-size: .92rem; line-height: 1.5; transition: color var(--transition); }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; }
+    .project-item {
+      display: grid; grid-template-columns: 2.8rem 1fr auto;
+      gap: 1.5rem; align-items: start;
+      padding: 1.8rem 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+      transition: border-color var(--transition);
+    }
+    .project-item:first-child { border-top: 1px solid var(--border); }
+    .project-item:hover .project-card { background: var(--bg2); }
+    .project-num {
+      font-family: 'Playfair Display', serif; font-size: 1rem;
+      color: var(--accent); padding-top: .2rem; font-weight: 400;
+      opacity: .7;
+    }
+    .project-title { font-weight: 600; font-size: 1rem; margin-bottom: .3rem; color: var(--ink); transition: color var(--transition); }
+    .project-item:hover .project-title { color: var(--accent); }
+    .project-desc { color: var(--ink2); font-size: .9rem; line-height: 1.65; transition: color var(--transition); }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .7rem; }
+    .tag {
+      font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+      padding: .22rem .6rem; background: var(--tag-bg); border: 1px solid var(--border);
+      border-radius: 2px; color: var(--tag-color);
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .project-arrow {
+      font-size: 1.1rem; color: var(--ink3); padding-top: .25rem;
+      transition: transform var(--transition), color var(--transition);
+    }
+    .project-item:hover .project-arrow { transform: translate(3px,-3px); color: var(--accent); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .skill-group {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      transition: background var(--transition), border-color var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .skill-group:hover { border-color: var(--accent); }
+    .skill-group-title {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      margin-bottom: 1.1rem; color: var(--ink); font-weight: 600;
+      transition: color var(--transition);
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      padding: .38rem 0; border-bottom: 1px solid var(--border);
+      font-size: .87rem; color: var(--ink2);
+      display: flex; align-items: center; gap: .6rem;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 3rem; }
+    .exp-item {
+      display: grid; grid-template-columns: 155px 1fr; gap: 2rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .exp-item:hover { border-color: var(--accent); }
+    .exp-meta { }
+    .exp-period {
+      font-size: .78rem; color: var(--ink3); letter-spacing: .05em;
+      line-height: 1.6; padding-top: .2rem;
+      transition: color var(--transition);
+    }
+    .exp-role { font-weight: 600; font-size: 1.02rem; color: var(--ink); margin-bottom: .2rem; transition: color var(--transition); }
+    .exp-company { color: var(--accent); font-size: .88rem; margin-bottom: .9rem; font-weight: 500; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      color: var(--ink2); font-size: .88rem; line-height: 1.7;
+      padding: .28rem 0; border-bottom: 1px solid var(--border);
+      display: flex; gap: .7rem;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .exp-bullets li:last-child { border-bottom: none; }
+    .exp-bullets li::before { content: '▸'; color: var(--accent); flex-shrink: 0; font-size: .75rem; margin-top: .28rem; }
+
+    /* ── CONTACT ── */
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.2; color: var(--ink);
+      transition: color var(--transition);
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-sub { color: var(--ink2); font-size: .94rem; margin-top: 1rem; line-height: 1.7; transition: color var(--transition); }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: .85rem;
+      text-decoration: none; color: var(--ink); font-size: .92rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: .9rem 1.1rem;
+      transition: all var(--transition); box-shadow: var(--shadow);
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(4px); background: rgba(16,110,190,.05); }
+    .contact-icon {
+      width: 32px; height: 32px; background: rgba(16,110,190,.1);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: var(--accent); flex-shrink: 0;
+      transition: background var(--transition);
+    }
+    .contact-link:hover .contact-icon { background: var(--accent); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: var(--max); margin: 0 auto; padding: 2rem 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .78rem; color: var(--ink3);
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .about-grid, .skills-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-item { grid-template-columns: 1fr; gap: .5rem; padding: 1.25rem; }
+      .project-item { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="#hero" class="nav-logo">SM</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-accent"></div>
+  <p class="hero-eyebrow">Data Engineer · Data Scientist · Analytics Engineer</p>
+  <h1>Sohith Sai M<br><em>Turning data<br>into decisions.</em></h1>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">3<sup>+</sup></div>
+      <div class="hero-stat-label">Years of Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">10<sup>+</sup></div>
+      <div class="hero-stat-label">End-to-End Projects</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2<sup>×</sup></div>
+      <div class="hero-stat-label">Peer-reviewed Papers</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">AWS</div>
+      <div class="hero-stat-label">Certified Data Engineer</div>
+    </div>
+  </div>
+
+  <p class="hero-sub">M.S. Data Science · University at Buffalo, SUNY · Building scalable pipelines, production ML models, and systems that drive real decisions.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <p class="hero-scroll">Scroll to explore</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label reveal">About</p>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>Data Engineer & Scientist with 3+ years of experience bridging the gap between raw data infrastructure and actionable machine learning insights. Expert in building scalable, distributed ETL/ELT pipelines on AWS/GCP and designing advanced data models to support high-performance analytics.</p>
+      <p>Proven track record in optimizing data workflows and deploying production-grade ML models. Passionate about driving business decision-making through reliable data products and rigorous statistical analysis.</p>
+      <p>Open to relocation and actively seeking full-time roles in data engineering, data science, and analytics engineering.</p>
+    </div>
+    <div class="about-facts">
+      <div class="fact">
+        <p class="fact-label">Graduate Education</p>
+        <p class="fact-value">M.S. Engineering Science: Data Science<br>University at Buffalo, SUNY · 2026</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Undergraduate</p>
+        <p class="fact-value">B.Tech Computer Science & Engineering<br>SRM University–AP · 2024</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Certification</p>
+        <p class="fact-value">AWS Certified Data Engineer – Associate · 2025</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Location</p>
+        <p class="fact-value">Buffalo, NY · Open to Relocation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">Projects</p>
+  <div class="projects-list reveal">
+
+    <a href="https://github.com/wantedchicken/fraud-detection" target="_blank" class="project-item">
+      <span class="project-num">01</span>
+      <div>
+        <p class="project-title">Real-Time Financial Fraud Detection System</p>
+        <p class="project-desc">Low-latency streaming pipeline using Apache Kafka and PySpark Streaming to ingest and process high-frequency transaction data. Implemented windowing functions and stateful stream processing to identify anomalous spending patterns in real-time, reducing potential fraud losses by 20%.</p>
+        <div class="project-tags">
+          <span class="tag">Apache Kafka</span><span class="tag">PySpark Streaming</span><span class="tag">Real-Time</span><span class="tag">Anomaly Detection</span><span class="tag">ML</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/wantedchicken/m5-demand-forecasting" target="_blank" class="project-item">
+      <span class="project-num">02</span>
+      <div>
+        <p class="project-title">M5 Demand Forecasting (Walmart)</p>
+        <p class="project-desc">Time-series forecasting engine predicting product-level Walmart sales from historical data, accounting for seasonality and price fluctuations. Engineered high-cardinality features and applied Gradient Boosting models (XGBoost/LightGBM) to minimize Mean Absolute Scaled Error (MASE).</p>
+        <div class="project-tags">
+          <span class="tag">XGBoost</span><span class="tag">LightGBM</span><span class="tag">Time-Series</span><span class="tag">Feature Engineering</span><span class="tag">Forecasting</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/wantedchicken/citibike-trip-prediction" target="_blank" class="project-item">
+      <span class="project-num">03</span>
+      <div>
+        <p class="project-title">Citi Bike Trip Prediction System</p>
+        <p class="project-desc">End-to-end ML pipeline predicting ride demand using LightGBM with Hopsworks feature store, MLflow experiment tracking, and a live Streamlit dashboard deployed via GitHub Actions CI/CD.</p>
+        <div class="project-tags">
+          <span class="tag">LightGBM</span><span class="tag">Hopsworks</span><span class="tag">MLflow</span><span class="tag">Streamlit</span><span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/wantedchicken/customer-segmentation" target="_blank" class="project-item">
+      <span class="project-num">04</span>
+      <div>
+        <p class="project-title">Customer Segmentation & Retention Analytics</p>
+        <p class="project-desc">K-Means clustering on RFM (Recency, Frequency, Monetary) metrics to identify high-value vs. at-risk customer segments. Designed automated feature-engineering pipelines for cohort-level engagement metrics enabling data-driven churn intervention strategies.</p>
+        <div class="project-tags">
+          <span class="tag">K-Means</span><span class="tag">RFM Analysis</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Churn Prediction</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/wantedchicken/nyc-snowflake-pipeline" target="_blank" class="project-item">
+      <span class="project-num">05</span>
+      <div>
+        <p class="project-title">NYC Taxi Data Engineering & Analytics Platform</p>
+        <p class="project-desc">Scalable ETL pipeline for 50+ GB of geospatial data using partitioning and Snowflake, reducing data transformation time by 40%. Delivered interactive dashboards for operational KPIs, cutting reporting latency by 40%.</p>
+        <div class="project-tags">
+          <span class="tag">Snowflake</span><span class="tag">ETL</span><span class="tag">Geospatial</span><span class="tag">Power BI</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="https://github.com/wantedchicken/clip-chest-xray" target="_blank" class="project-item">
+      <span class="project-num">06</span>
+      <div>
+        <p class="project-title">CLIP Fine-tuning on Chest Radiology</p>
+        <p class="project-desc">Fine-tuned ViT-B/32 CLIP model on the Indiana University chest X-ray dataset using contrastive loss, achieving a 41% improvement in Top-1 image-text retrieval accuracy. Published on UB CSE website in ACM-style format.</p>
+        <div class="project-tags">
+          <span class="tag">CLIP</span><span class="tag">ViT-B/32</span><span class="tag">PyTorch</span><span class="tag">Contrastive Loss</span><span class="tag">Medical AI</span>
+        </div>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">Skills</p>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <p class="skill-group-title">Data Engineering</p>
+      <ul class="skill-list">
+        <li>Python · SQL · ETL/ELT</li>
+        <li>Snowflake · Data Modeling</li>
+        <li>Apache Airflow</li>
+        <li>PySpark · Hadoop (HDFS/Hive)</li>
+        <li>AWS (Lambda, Glue, S3, Athena)</li>
+        <li>GCP · Azure Data Factory</li>
+        <li>Apache Kafka</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Machine Learning</p>
+      <ul class="skill-list">
+        <li>TensorFlow · PyTorch</li>
+        <li>Scikit-Learn · XGBoost · LightGBM</li>
+        <li>MLflow · Hopsworks</li>
+        <li>Time-Series Analysis · Clustering</li>
+        <li>CLIP · Fine-tuning · Transformers</li>
+        <li>Feature Engineering</li>
+        <li>Data Structures & Algorithms</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Tools & Analytics</p>
+      <ul class="skill-list">
+        <li>Power BI · Tableau · Excel · R</li>
+        <li>Docker · Kubernetes</li>
+        <li>Git · CI/CD · Agile · SDLC</li>
+        <li>API Development · Streamlit</li>
+        <li>Data Lineage & Governance</li>
+        <li>Data Observability</li>
+        <li>Jupyter Notebook</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">Experience</p>
+  <div class="exp-list reveal">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">Jul 2022 – Jul 2024</p>
+      </div>
+      <div>
+        <p class="exp-role">Data Engineer</p>
+        <p class="exp-company">Mrdotsolutions Pvt. Ltd</p>
+        <ul class="exp-bullets">
+          <li>Engineered high-throughput, cloud-native ETL/ELT pipelines on AWS (Glue, S3, EMR) processing over 50+ GB of daily batch data to drive business intelligence.</li>
+          <li>Optimized distributed Spark/PySpark processing jobs, achieving a 55% reduction in runtime through advanced execution plan tuning and cache management.</li>
+          <li>Architected dimensional data models in Snowflake, enabling performant, schema-on-read analytics for downstream BI tools like Power BI and Tableau.</li>
+          <li>Implemented data observability and quality frameworks, ensuring &gt;99.5% SLA adherence by automating reconciliation and schema validation.</li>
+          <li>Partnered with Data Scientists to design and manage ML feature stores, optimizing data ingestion pipelines to reduce model training latency.</li>
+          <li>Orchestrated complex data workflows using Airflow, managing cross-platform dependencies between AWS and external API sources.</li>
+          <li>Deployed CI/CD pipelines for automated data testing and deployment, minimizing production downtime and ensuring code quality.</li>
+          <li>Conducted deep-dive technical cost analysis, reconfiguring storage classes and compute clusters to reduce cloud overhead by 25%.</li>
+          <li>Developed and documented end-to-end data lineage and governance standards to comply with enterprise data security and privacy policies.</li>
+          <li>Mentored junior team members on SQL optimization and Big Data best practices, improving overall team engineering standards.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-period">Jul 2021 – Jul 2022</p>
+      </div>
+      <div>
+        <p class="exp-role">Associate Data Engineer</p>
+        <p class="exp-company">Mrdotsolutions Pvt. Ltd</p>
+        <ul class="exp-bullets">
+          <li>Refactored legacy SQL queries and stored procedures, improving analytical query performance and dashboard responsiveness by 45%.</li>
+          <li>Performed root-cause analysis on recurring pipeline failures, implementing automated error-handling mechanisms that boosted system reliability by 30%.</li>
+          <li>Developed normalized database schemas in PostgreSQL to support transactional integrity while enabling efficient analytical reporting.</li>
+          <li>Streamlined data ingestion from Hadoop/HDFS to cloud environments, maintaining data parity throughout the migration process.</li>
+          <li>Automated repetitive ETL tasks using Python scripts, significantly reducing manual effort and human-error risks in data preparation.</li>
+          <li>Authored technical architecture diagrams and runbooks to facilitate knowledge transfer and maintain operational transparency.</li>
+          <li>Actively participated in Agile Scrum ceremonies, translating business requirements into actionable technical tasks and sprint deliverables.</li>
+          <li>Validated data dependencies and performed rigorous impact assessments before production releases to ensure zero disruption to downstream stakeholders.</li>
+          <li>Assisted in the development of robust data storage strategies and indexing techniques to handle rapid growth in data volume.</li>
+          <li>Implemented access control policies and audit logging to ensure organizational data compliance and secure infrastructure operations.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label reveal">Contact</p>
+  <div class="contact-inner reveal">
+    <div>
+      <h2 class="contact-heading">Let's work<br><em>together.</em></h2>
+      <p class="contact-sub">I'm actively looking for full-time roles in data engineering, data science, and analytics engineering. Open to relocation. Reach out via any of the channels below.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sohithjobz@gmail.com" class="contact-link">
+        <span class="contact-icon">✉</span>
+        sohithjobz@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/sohithsaim" target="_blank" class="contact-link">
+        <span class="contact-icon">in</span>
+        linkedin.com/in/sohithsaim
+      </a>
+      <a href="https://github.com/wantedchicken" target="_blank" class="contact-link">
+        <span class="contact-icon">gh</span>
+        github.com/wantedchicken
+      </a>
+      <a href="tel:+17162268430" class="contact-link">
+        <span class="contact-icon">☎</span>
+        +1 716 226 8430
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Sohith Sai M</span>
+  <span>Buffalo, NY · Open to Relocation</span>
+</footer>
+
+<script>
+  // ── Theme toggle ──
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+
+  // Respect system preference on first load
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (prefersDark ? 'dark' : 'light');
+  html.setAttribute('data-theme', initial);
+  btn.textContent = initial === 'dark' ? '☀️' : '🌙';
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next    = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
